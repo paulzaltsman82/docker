@@ -1,7 +1,6 @@
-Centos7 minimal was used in this. 
 Hi, never used ansible with docker container module, i usually use ansible_container, just for the sake of this to work, skipped a lot of my own methodology and best practices.
 Didn't finish the mariadb task, tried to be smart and chose a bad docker image to save time...
-
+Centos7 minimal was used in this. 
 
 MUST: 
  
