@@ -1,0 +1,16 @@
+service: nginx
+repo: docker.io/nginx
+tag: latest
+conf_dir: "/etc/nginx/"
+conf_files:
+  - nginx.conf
+  - htpasswd
+  - paul.pipl.test.pem
+  - paul.pipl.test.key
+ports:
+ - 80:80
+ - 443:443
+ - 444:444
+volumes:
+  - "{{ docker_dir }}/{{ service }}/:{{ conf_dir }}"
+user: root

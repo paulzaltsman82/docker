@@ -1,0 +1,42 @@
+---
+
+- name: Include vars from the {{ service }}
+  include_vars: "{{ playbook_dir }}/roles/{{ service }}/vars/main.yaml"
+
+- name: Assign a shared conf folder for all dockers
+  set_fact:
+    docker_dir: /conf
+  when: service != 'mariadb_master' and service != 'mariadb_slave'
+
+- name: "Create the {{ docker_dir }} directory on the host"
+  file:
+    path: "{{ docker_dir }}/{{ service }}"
+    state: 'directory'
+    mode: '0755'
+  when: service != 'mariadb_master' and service != 'mariadb_slave'
+
+- name: 'Put the service conf files in place for {{ service }}'
+  copy:
+    src: "{{ item }}"
+    dest: "{{ docker_dir }}/{{service}}/{{ item }}"
+    mode: '0644'
+  with_items: "{{ conf_files }}"
+  when: service != 'mariadb_master' and service != 'mariadb_slave' 
+
+- name: "Start docker for {{ service }}"
+  docker_container:
+    image: "{{ repo }}:{{ tag }}"
+    name: "pipl_{{ service }}"
+    volumes: "{{ volumes }}"
+    user: "{{ user }}"
+    ports: "{{ ports }}"
+    state: 'started'
+    network_mode: 'bridge'
+    networks:
+      - name: "pipl"
+        aliases:
+        - "{{ service }}"  
+    restart_policy: 'on-failure'
+    log_driver: 'json-file'
+    env: "{{ env }}"
+    ulimits: "{{ ulimits }}"

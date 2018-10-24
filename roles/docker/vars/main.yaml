@@ -1,0 +1,3 @@
+ulimits: nofile:10000:10000
+env:
+    DEVOPS_TEST_PIPL: Paul

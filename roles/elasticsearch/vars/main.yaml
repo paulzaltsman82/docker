@@ -1,0 +1,13 @@
+service: elasticsearch
+repo: docker.elastic.co/elasticsearch/elasticsearch
+tag: 6.4.2
+conf_dir: "/usr/share/elasticsearch/config/"
+conf_files:
+ - elasticsearch.yml
+ports:
+  - 9200:9200
+  - 9300:9300
+volumes:
+  - "{{ docker_dir }}/{{ service }}/elasticsearch.yml:{{ conf_dir }}/elasticsearch.yml"
+user: elasticsearch
+ulimits: "memlock:-1:-1"

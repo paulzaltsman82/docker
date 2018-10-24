@@ -1,0 +1,14 @@
+---
+
+- hosts: "docker"
+  gather_facts: no
+  roles:
+    - { role: common, tags: ["common"] }
+    - { role: elasticsearch, tags: ["elasticsearch"] }  
+    - { role: kibana, tags: ["kibana"] }  
+    - { role: filebeat, tags: ["filebeat"] }  
+    - { role: logstash, tags: ["logstash"] }  
+    - { role: cerebro, tags: ["cerebro"] }
+    - { role: nginx, tags: ["nginx"] }
+    - { role: mariadb_master, tags: ["mariadb_master"] }
+    - { role: mariadb_slave, tags: ["mariadb_slave"] }

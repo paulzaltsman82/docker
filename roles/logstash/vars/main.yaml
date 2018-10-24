@@ -1,0 +1,14 @@
+service: logstash
+repo: docker.elastic.co/logstash/logstash
+tag: 6.4.2
+conf_dir: "/usr/share/logstash/config"
+conf_files:
+  - logstash.yml
+  - default.conf
+  - pipelines.yml
+ports:
+  - 5044:5044
+  - 9600:9600
+volumes:
+  - "{{ docker_dir }}/{{ service }}/:{{ conf_dir }}"
+user: logstash

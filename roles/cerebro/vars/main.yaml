@@ -1,0 +1,7 @@
+service: cerebro
+repo: docker.io/lmenezes/cerebro
+tag: latest
+ports:
+  - 9000:9000
+user: 
+env:

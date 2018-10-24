@@ -1,0 +1,13 @@
+service: filebeat
+repo: docker.elastic.co/beats/filebeat
+tag: 6.4.2
+conf_dir: "/usr/share/filebeat/"
+conf_files:
+  - filebeat.yml
+ports:
+  - 5066:5066
+volumes:
+  - "{{ docker_dir }}/{{ service }}/filebeat.yml:{{ conf_dir }}filebeat.yml"
+  - /var/lib/docker/containers/:/var/lib/docker/containers/
+  - /var/log/:/var/log/
+user: root

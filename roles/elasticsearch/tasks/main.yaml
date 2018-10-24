@@ -1,0 +1,3 @@
+
+ - name: Adjust mapping size for elasticsearch 
+   command: "sysctl -w vm.max_map_count=262144"

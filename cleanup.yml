@@ -1,0 +1,14 @@
+---
+actions:
+  1:
+    action: delete_indices
+    options:
+      continue_if_exception: False
+    filters:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 7
+      exclude:

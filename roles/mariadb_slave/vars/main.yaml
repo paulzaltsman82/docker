@@ -1,0 +1,15 @@
+service: mariadb_slave
+repo: docker.io/bitnami/mariadb
+tag: latest
+ports:
+  - 3307:3307
+volumes:
+user:
+env:
+  MARIADB_ROOT_PASSWORD: password123
+  MARIADB_REPLICATION_MODE: slave 
+  MARIADB_REPLICATION_USER: my_repl_user 
+  MARIADB_REPLICATION_PASSWORD: my_repl_password 
+  MARIADB_MASTER_HOST: pipl_mariadb_master
+  MARIADB_MASTER_PORT_NUMBER: 3306
+  MARIADB_PORT_NUMBER: 3307

@@ -1,0 +1,13 @@
+filebeat.inputs:
+- type: docker
+  enabled: true
+  paths:
+  - '/var/lib/docker/containers/*/*.log'
+  json.message_key: log
+  json.keys_under_root: true
+- type: log
+  paths:
+    - /var/log/anaconda/*.log
+  input_type: log
+output.logstash:
+  hosts: ["logstash:5044"]
